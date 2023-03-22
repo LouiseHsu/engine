@@ -32,6 +32,12 @@ typedef PointerDataPacketCallback = void Function(PointerDataPacket packet);
 /// framework and should not be propagated further.
 typedef KeyDataCallback = bool Function(KeyData data);
 
+/// Signature for [PlatformDispatcher.onStylusAction].
+///
+/// The callback should return true if the stylus action event has been handled by the
+/// framework and should not be propagated further.
+typedef StylusActionCallback = void Function(PreferredStylusAction action);
+
 /// Signature for [PlatformDispatcher.onSemanticsAction].
 typedef SemanticsActionCallback = void Function(int nodeId, SemanticsAction action, ByteData? args);
 
@@ -65,6 +71,8 @@ const double _kUnsetGestureSetting = -1.0;
 //
 // See embedder.cc::kFlutterKeyDataChannel for more information.
 const String _kFlutterKeyDataChannel = 'flutter/keydata';
+
+const String _kFlutterStylusActionChannel = 'flutter/stylusaction';
 
 @pragma('vm:entry-point')
 ByteData? _wrapUnmodifiableByteData(ByteData? byteData) =>
@@ -1032,6 +1040,22 @@ class PlatformDispatcher {
     _onSystemFontFamilyChangedZone = Zone.current;
   }
 
+  StylusActionCallback? get onStylusAction => _onStylusAction;
+  StylusActionCallback? _onStylusAction;
+  Zone _onStylusActionZone = Zone.root;
+  set onStylusAction(StylusActionCallback? callback) {
+    _onStylusAction = callback;
+    _onStylusActionZone = Zone.current;
+  }
+
+  void _dispatchStylusAction(String jsonData) {
+    final Map<String, Object?> data = json.decode(jsonData) as Map<String, Object?>;
+
+    PreferredStylusAction preferredAction = PreferredStylusAction.values.byName(data['type'].toString());
+
+    _invoke1<PreferredStylusAction>(onStylusAction, _onStylusActionZone, preferredAction);
+  }
+  
   // Called from the engine, via hooks.dart
   void _updateUserSettingsData(String jsonData) {
     final Map<String, Object?> data = json.decode(jsonData) as Map<String, Object?>;
@@ -1681,6 +1705,15 @@ class FrameTiming {
         'pictureCacheBytes: $pictureCacheBytes, '
         'frameNumber: ${_data.last})';
   }
+}
+
+enum PreferredStylusAction {
+  ignore,
+  showColorPalette,
+  switchEraser,
+  showInkAttributes,
+  switchPrevious,
+  unknown
 }
 
 /// States that an application can be in.

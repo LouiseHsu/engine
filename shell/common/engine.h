@@ -933,6 +933,8 @@ class Engine final : public RuntimeDelegate, PointerDataDispatcher::Delegate {
 
   void HandleSettingsPlatformMessage(PlatformMessage* message);
 
+  void HandleStylusActionPlatformMessage(PlatformMessage* message);
+
   void HandleAssetPlatformMessage(std::unique_ptr<PlatformMessage> message);
 
   bool GetAssetAsBuffer(const std::string& name, std::vector<uint8_t>* data);

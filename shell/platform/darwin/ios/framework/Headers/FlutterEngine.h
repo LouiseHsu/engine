@@ -409,6 +409,8 @@ FLUTTER_DARWIN_EXPORT
  */
 @property(nonatomic, readonly) FlutterBasicMessageChannel* keyEventChannel;
 
+@property(nonatomic, readonly) FlutterBasicMessageChannel* stylusActionChannel;
+
 /**
  * The depcreated `NSURL` of the Dart VM Service for the service isolate.
  *

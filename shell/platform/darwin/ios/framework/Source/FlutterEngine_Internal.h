@@ -58,6 +58,7 @@ extern NSString* _Nonnull const kFlutterEngineWillDealloc;
        initialRoute:(nullable NSString*)initialRoute;
 - (void)attachView;
 - (void)notifyLowMemory;
+- (void)notifyStylusAction:(nonnull NSString*)preferredAction;
 - (nonnull flutter::PlatformViewIOS*)iosPlatformView;
 
 - (void)waitForFirstFrame:(NSTimeInterval)timeout

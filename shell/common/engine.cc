@@ -28,6 +28,7 @@ static constexpr char kLifecycleChannel[] = "flutter/lifecycle";
 static constexpr char kNavigationChannel[] = "flutter/navigation";
 static constexpr char kLocalizationChannel[] = "flutter/localization";
 static constexpr char kSettingsChannel[] = "flutter/settings";
+static constexpr char kStylusActionChannel[] = "flutter/stylusAction";
 static constexpr char kIsolateChannel[] = "flutter/isolate";
 
 namespace {
@@ -304,6 +305,9 @@ void Engine::DispatchPlatformMessage(std::unique_ptr<PlatformMessage> message) {
   } else if (channel == kSettingsChannel) {
     HandleSettingsPlatformMessage(message.get());
     return;
+  } else if (channel == kStylusActionChannel) {
+    HandleStylusActionPlatformMessage(message.get());
+    return;
   } else if (!runtime_controller_->IsRootIsolateRunning() &&
              channel == kNavigationChannel) {
     // If there's no runtime_, we may still need to set the initial route.
@@ -404,6 +408,15 @@ void Engine::HandleSettingsPlatformMessage(PlatformMessage* message) {
   std::string jsonData(reinterpret_cast<const char*>(data.GetMapping()),
                        data.GetSize());
   if (runtime_controller_->SetUserSettingsData(jsonData)) {
+    ScheduleFrame();
+  }
+}
+
+void Engine::HandleStylusActionPlatformMessage(PlatformMessage* message) {
+  const auto& data = message->data();
+  std::string jsonData(reinterpret_cast<const char*>(data.GetMapping()),
+                       data.GetSize());
+  if (runtime_controller_->DispatchStylusAction(jsonData)) {
     ScheduleFrame();
   }
 }

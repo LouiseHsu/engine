@@ -60,6 +60,9 @@ void PlatformConfiguration::DidCreateIsolate() {
   dispatch_platform_message_.Set(
       tonic::DartState::Current(),
       Dart_GetField(library, tonic::ToDart("_dispatchPlatformMessage")));
+  dispatch_stylus_action_.Set(
+      tonic::DartState::Current(),
+      Dart_GetField(library, tonic::ToDart("_dispatchStylusAction")));
   dispatch_semantics_action_.Set(
       tonic::DartState::Current(),
       Dart_GetField(library, tonic::ToDart("_dispatchSemanticsAction")));
@@ -116,6 +119,19 @@ void PlatformConfiguration::UpdateLifecycleState(const std::string& data) {
   }
   tonic::DartState::Scope scope(dart_state);
   tonic::CheckAndHandleError(tonic::DartInvoke(update_lifecycle_state_.Get(),
+                                               {
+                                                   tonic::StdStringToDart(data),
+                                               }));
+}
+
+void PlatformConfiguration::DispatchStylusAction(const std::string& data){
+  std::shared_ptr<tonic::DartState> dart_state =
+  dispatch_stylus_action_.dart_state().lock();
+  if (!dart_state) {
+    return;
+  }
+  tonic::DartState::Scope scope(dart_state);
+  tonic::CheckAndHandleError(tonic::DartInvoke(dispatch_stylus_action_.Get(),
                                                {
                                                    tonic::StdStringToDart(data),
                                                }));

@@ -134,6 +134,7 @@ static constexpr int kNumProfilerSamplesPerSec = 5;
   fml::scoped_nsobject<FlutterBasicMessageChannel> _systemChannel;
   fml::scoped_nsobject<FlutterBasicMessageChannel> _settingsChannel;
   fml::scoped_nsobject<FlutterBasicMessageChannel> _keyEventChannel;
+  fml::scoped_nsobject<FlutterBasicMessageChannel> _stylusActionChannel;
   fml::scoped_nsobject<FlutterMethodChannel> _screenshotChannel;
 
   int64_t _nextTextureId;
@@ -498,6 +499,9 @@ static constexpr int kNumProfilerSamplesPerSec = 5;
 - (FlutterBasicMessageChannel*)keyEventChannel {
   return _keyEventChannel.get();
 }
+- (FlutterBasicMessageChannel*)stylusActionChannel {
+  return _stylusActionChannel.get();
+}
 
 - (NSURL*)observatoryUrl {
   return [_publisher.get() url];
@@ -521,6 +525,7 @@ static constexpr int kNumProfilerSamplesPerSec = 5;
   _settingsChannel.reset();
   _keyEventChannel.reset();
   _spellCheckChannel.reset();
+  _stylusActionChannel.reset();
 }
 
 - (void)startProfiler {
@@ -616,6 +621,11 @@ static constexpr int kNumProfilerSamplesPerSec = 5;
 
   _keyEventChannel.reset([[FlutterBasicMessageChannel alloc]
          initWithName:@"flutter/keyevent"
+      binaryMessenger:self.binaryMessenger
+                codec:[FlutterJSONMessageCodec sharedInstance]]);
+
+  _stylusActionChannel.reset([[FlutterBasicMessageChannel alloc]
+         initWithName:@"flutter/stylusAction"
       binaryMessenger:self.binaryMessenger
                 codec:[FlutterJSONMessageCodec sharedInstance]]);
 
@@ -913,6 +923,11 @@ static void SetEntryPoint(flutter::Settings* settings, NSString* entrypoint, NSS
     _shell->NotifyLowMemoryWarning();
   }
   [_systemChannel sendMessage:@{@"type" : @"memoryPressure"}];
+}
+
+- (void)notifyStylusAction:(NSString*)preferredAction {
+  NSLog(@"stylus action on engine side");
+  [_stylusActionChannel sendMessage:@{@"type" : preferredAction}];
 }
 
 #pragma mark - Text input delegate

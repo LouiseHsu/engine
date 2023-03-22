@@ -205,6 +205,21 @@ class RuntimeController : public PlatformConfigurationClient {
   bool SetUserSettingsData(const std::string& data);
 
   //----------------------------------------------------------------------------
+  /// @brief      Dispatch the stylus action to the running isolate. If
+  ///             the isolate is not running, this data will be saved and
+  ///             flushed to the isolate when it starts running.
+  ///
+  /// @deprecated The persistent isolate data must be used for this purpose
+  ///             instead.
+  ///
+  /// @param[in]  data  The preferred action data.
+  ///
+  /// @return     If the lifecycle state data was forwarded to the running
+  ///             isolate.
+  ///
+  ///
+  bool DispatchStylusAction(const std::string& preferred_action_data);
+  //----------------------------------------------------------------------------
   /// @brief      Forward the lifecycle state data to the running isolate. If
   ///             the isolate is not running, this data will be saved and
   ///             flushed to the isolate when it starts running.

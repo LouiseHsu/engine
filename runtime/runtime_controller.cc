@@ -157,6 +157,19 @@ bool RuntimeController::SetUserSettingsData(const std::string& data) {
   return false;
 }
 
+bool RuntimeController::DispatchStylusAction(const std::string& preferred_action_data) {
+  platform_data_.stylus_action = preferred_action_data;
+
+  if (auto* platform_configuration = GetPlatformConfigurationIfAvailable()) {
+    platform_configuration->DispatchStylusAction(
+        platform_data_.stylus_action);
+    return true;
+  }
+
+  return false;
+}
+
+
 bool RuntimeController::SetLifecycleState(const std::string& data) {
   platform_data_.lifecycle_state = data;
 

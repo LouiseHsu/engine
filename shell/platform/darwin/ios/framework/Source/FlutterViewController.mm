@@ -1235,45 +1235,26 @@ static flutter::PointerData::DeviceKind DeviceKindFromTouchType(UITouch* touch) 
 #pragma mark - Stylus Events
 
 - (void)pencilInteractionDidTap:(UIPencilInteraction*)interaction API_AVAILABLE(ios(13.4)) {
-  flutter::PointerData pointer_data = [self createAuxillaryStylusActionData];
-
-  auto packet = std::make_unique<flutter::PointerDataPacket>(1);
-  packet->SetPointerData(/*index=*/0, pointer_data);
-  [_engine.get() dispatchPointerDataPacket:std::move(packet)];
-}
-
-- (flutter::PointerData)createAuxillaryStylusActionData API_AVAILABLE(ios(13.4)) {
-  flutter::PointerData pointer_data;
-  pointer_data.Clear();
-
-  switch (UIPencilInteraction.preferredTapAction) {
-    case UIPencilPreferredActionIgnore:
-      pointer_data.preferred_auxiliary_stylus_action =
-          flutter::PointerData::PreferredStylusAuxiliaryAction::kIgnore;
-      break;
-    case UIPencilPreferredActionShowColorPalette:
-      pointer_data.preferred_auxiliary_stylus_action =
-          flutter::PointerData::PreferredStylusAuxiliaryAction::kShowColorPalette;
-      break;
-    case UIPencilPreferredActionSwitchEraser:
-      pointer_data.preferred_auxiliary_stylus_action =
-          flutter::PointerData::PreferredStylusAuxiliaryAction::kSwitchEraser;
-      break;
-    case UIPencilPreferredActionSwitchPrevious:
-      pointer_data.preferred_auxiliary_stylus_action =
-          flutter::PointerData::PreferredStylusAuxiliaryAction::kSwitchPrevious;
-      break;
-    default:
-      pointer_data.preferred_auxiliary_stylus_action =
-          flutter::PointerData::PreferredStylusAuxiliaryAction::kUnknown;
-      break;
+    switch (UIPencilInteraction.preferredTapAction) {
+      case UIPencilPreferredActionIgnore:
+        [_engine.get() notifyStylusAction:@"ignore"];
+        break;
+      case UIPencilPreferredActionShowColorPalette:
+        [_engine.get() notifyStylusAction:@"showColorPalette"];
+        break;
+      case UIPencilPreferredActionSwitchEraser:
+        [_engine.get() notifyStylusAction:@"switchEraser"];
+        break;
+      case UIPencilPreferredActionSwitchPrevious:
+        [_engine.get() notifyStylusAction:@"switchPrevious"];
+        break;
+      case UIPencilPreferredActionShowInkAttributes:
+        [_engine.get() notifyStylusAction:@"showInkAttributes"];
+        break;
+      default:
+        [_engine.get() notifyStylusAction:@"unknown"];
+        break;
   }
-
-  pointer_data.time_stamp = [[NSProcessInfo processInfo] systemUptime] * kMicrosecondsPerSecond;
-  pointer_data.kind = flutter::PointerData::DeviceKind::kStylus;
-  pointer_data.signal_kind = flutter::PointerData::SignalKind::kStylusAuxiliaryAction;
-
-  return pointer_data;
 }
 
 #pragma mark - Handle view resizing

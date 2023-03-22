@@ -67,6 +67,11 @@ void _updateUserSettingsData(String jsonData) {
 }
 
 @pragma('vm:entry-point')
+void _dispatchStylusAction(String jsonData) {
+  PlatformDispatcher.instance._dispatchStylusAction(jsonData);
+}
+
+@pragma('vm:entry-point')
 void _updateLifecycleState(String state) {
   PlatformDispatcher.instance._updateLifecycleState(state);
 }

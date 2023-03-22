@@ -320,6 +320,15 @@ class PlatformConfiguration final {
   void UpdateAccessibilityFeatures(int32_t flags);
 
   //----------------------------------------------------------------------------
+  /// @brief      Notifies the framework that the embedder encountered an
+  ///             stylus action.
+  ///
+  /// @param[in]  message  The message sent from the embedder to the Dart
+  ///                      application.
+  ///
+  void DispatchStylusAction(const std::string& data);
+
+  //----------------------------------------------------------------------------
   /// @brief      Notifies the PlatformConfiguration that the client has sent
   ///             it a message. This call originates in the platform view and
   ///             has been forwarded through the engine to here.
@@ -436,6 +445,7 @@ class PlatformConfiguration final {
   tonic::DartPersistentValue on_error_;
   tonic::DartPersistentValue update_locales_;
   tonic::DartPersistentValue update_user_settings_data_;
+  tonic::DartPersistentValue dispatch_stylus_action_;
   tonic::DartPersistentValue update_lifecycle_state_;
   tonic::DartPersistentValue update_semantics_enabled_;
   tonic::DartPersistentValue update_accessibility_features_;
