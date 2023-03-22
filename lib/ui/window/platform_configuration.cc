@@ -124,9 +124,9 @@ void PlatformConfiguration::UpdateLifecycleState(const std::string& data) {
                                                }));
 }
 
-void PlatformConfiguration::DispatchStylusAction(const std::string& data){
+void PlatformConfiguration::DispatchStylusAction(const std::string& data) {
   std::shared_ptr<tonic::DartState> dart_state =
-  dispatch_stylus_action_.dart_state().lock();
+      dispatch_stylus_action_.dart_state().lock();
   if (!dart_state) {
     return;
   }

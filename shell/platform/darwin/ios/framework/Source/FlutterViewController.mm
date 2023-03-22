@@ -1235,25 +1235,25 @@ static flutter::PointerData::DeviceKind DeviceKindFromTouchType(UITouch* touch) 
 #pragma mark - Stylus Events
 
 - (void)pencilInteractionDidTap:(UIPencilInteraction*)interaction API_AVAILABLE(ios(13.4)) {
-    switch (UIPencilInteraction.preferredTapAction) {
-      case UIPencilPreferredActionIgnore:
-        [_engine.get() notifyStylusAction:@"ignore"];
-        break;
-      case UIPencilPreferredActionShowColorPalette:
-        [_engine.get() notifyStylusAction:@"showColorPalette"];
-        break;
-      case UIPencilPreferredActionSwitchEraser:
-        [_engine.get() notifyStylusAction:@"switchEraser"];
-        break;
-      case UIPencilPreferredActionSwitchPrevious:
-        [_engine.get() notifyStylusAction:@"switchPrevious"];
-        break;
-      case UIPencilPreferredActionShowInkAttributes:
-        [_engine.get() notifyStylusAction:@"showInkAttributes"];
-        break;
-      default:
-        [_engine.get() notifyStylusAction:@"unknown"];
-        break;
+  switch (UIPencilInteraction.preferredTapAction) {
+    case UIPencilPreferredActionIgnore:
+      [_engine.get() notifyStylusAction:@"ignore"];
+      break;
+    case UIPencilPreferredActionShowColorPalette:
+      [_engine.get() notifyStylusAction:@"showColorPalette"];
+      break;
+    case UIPencilPreferredActionSwitchEraser:
+      [_engine.get() notifyStylusAction:@"switchEraser"];
+      break;
+    case UIPencilPreferredActionSwitchPrevious:
+      [_engine.get() notifyStylusAction:@"switchPrevious"];
+      break;
+    case UIPencilPreferredActionShowInkAttributes:
+      [_engine.get() notifyStylusAction:@"showInkAttributes"];
+      break;
+    default:
+      [_engine.get() notifyStylusAction:@"unknown"];
+      break;
   }
 }
 

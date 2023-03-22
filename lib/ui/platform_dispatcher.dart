@@ -1055,7 +1055,7 @@ class PlatformDispatcher {
 
     _invoke1<PreferredStylusAction>(onStylusAction, _onStylusActionZone, preferredAction);
   }
-  
+
   // Called from the engine, via hooks.dart
   void _updateUserSettingsData(String jsonData) {
     final Map<String, Object?> data = json.decode(jsonData) as Map<String, Object?>;
