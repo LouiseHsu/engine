@@ -72,8 +72,8 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)application:(UIApplication*)application
 //    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings
 //    API_DEPRECATED(
-//        "See -[UIApplicationDelegate application:didRegisterUserNotificationSettings:] deprecation",
-//        ios(8.0, 10.0));
+//        "See -[UIApplicationDelegate application:didRegisterUserNotificationSettings:]
+//        deprecation", ios(8.0, 10.0));
 
 /**
  * Called if this has been registered for `UIApplicationDelegate` callbacks.
