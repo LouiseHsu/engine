@@ -83,11 +83,11 @@ static NSString* const kRestorationStateAppModificationKey = @"mod-date";
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-- (void)application:(UIApplication*)application
-    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
-  [_lifeCycleDelegate application:application
-      didRegisterUserNotificationSettings:notificationSettings];
-}
+//- (void)application:(UIApplication*)application
+//    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
+//  [_lifeCycleDelegate application:application
+//      didRegisterUserNotificationSettings:notificationSettings];
+//}
 #pragma GCC diagnostic pop
 
 - (void)application:(UIApplication*)application
@@ -104,10 +104,10 @@ static NSString* const kRestorationStateAppModificationKey = @"mod-date";
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-- (void)application:(UIApplication*)application
-    didReceiveLocalNotification:(UILocalNotification*)notification {
-  [_lifeCycleDelegate application:application didReceiveLocalNotification:notification];
-}
+//- (void)application:(UIApplication*)application
+//    didReceiveLocalNotification:(UILocalNotification*)notification {
+//  [_lifeCycleDelegate application:application didReceiveLocalNotification:notification];
+//}
 #pragma GCC diagnostic pop
 
 - (void)userNotificationCenter:(UNUserNotificationCenter*)center

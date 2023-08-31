@@ -222,17 +222,17 @@ static BOOL IsPowerOfTwo(NSUInteger x) {
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-- (void)application:(UIApplication*)application
-    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
-  for (NSObject<FlutterApplicationLifeCycleDelegate>* delegate in _delegates) {
-    if (!delegate) {
-      continue;
-    }
-    if ([delegate respondsToSelector:_cmd]) {
-      [delegate application:application didRegisterUserNotificationSettings:notificationSettings];
-    }
-  }
-}
+//- (void)application:(UIApplication*)application
+//    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
+//  for (NSObject<FlutterApplicationLifeCycleDelegate>* delegate in _delegates) {
+//    if (!delegate) {
+//      continue;
+//    }
+//    if ([delegate respondsToSelector:_cmd]) {
+//      [delegate application:application didRegisterUserNotificationSettings:notificationSettings];
+//    }
+//  }
+//}
 #pragma GCC diagnostic pop
 
 - (void)application:(UIApplication*)application
@@ -279,17 +279,17 @@ static BOOL IsPowerOfTwo(NSUInteger x) {
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-- (void)application:(UIApplication*)application
-    didReceiveLocalNotification:(UILocalNotification*)notification {
-  for (NSObject<FlutterApplicationLifeCycleDelegate>* delegate in _delegates) {
-    if (!delegate) {
-      continue;
-    }
-    if ([delegate respondsToSelector:_cmd]) {
-      [delegate application:application didReceiveLocalNotification:notification];
-    }
-  }
-}
+//- (void)application:(UIApplication*)application
+//    didReceiveLocalNotification:(UILocalNotification*)notification {
+//  for (NSObject<FlutterApplicationLifeCycleDelegate>* delegate in _delegates) {
+//    if (!delegate) {
+//      continue;
+//    }
+//    if ([delegate respondsToSelector:_cmd]) {
+//      [delegate application:application didReceiveLocalNotification:notification];
+//    }
+//  }
+//}
 #pragma GCC diagnostic pop
 
 - (void)userNotificationCenter:(UNUserNotificationCenter*)center

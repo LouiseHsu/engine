@@ -69,11 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Called if this has been registered for `UIApplicationDelegate` callbacks.
  */
-- (void)application:(UIApplication*)application
-    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings
-    API_DEPRECATED(
-        "See -[UIApplicationDelegate application:didRegisterUserNotificationSettings:] deprecation",
-        ios(8.0, 10.0));
+//- (void)application:(UIApplication*)application
+//    didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings
+//    API_DEPRECATED(
+//        "See -[UIApplicationDelegate application:didRegisterUserNotificationSettings:] deprecation",
+//        ios(8.0, 10.0));
 
 /**
  * Called if this has been registered for `UIApplicationDelegate` callbacks.
@@ -99,11 +99,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Calls all plugins registered for `UIApplicationDelegate` callbacks.
  */
-- (void)application:(UIApplication*)application
-    didReceiveLocalNotification:(UILocalNotification*)notification
-    API_DEPRECATED(
-        "See -[UIApplicationDelegate application:didReceiveLocalNotification:] deprecation",
-        ios(4.0, 10.0));
+//- (void)application:(UIApplication*)application
+//    didReceiveLocalNotification:(UILocalNotification*)notification
+//    API_DEPRECATED(
+//        "See -[UIApplicationDelegate application:didReceiveLocalNotification:] deprecation",
+//        ios(4.0, 10.0));
 
 /**
  * Called if this has been registered for `UIApplicationDelegate` callbacks.
